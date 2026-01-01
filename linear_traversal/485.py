@@ -1,3 +1,4 @@
+#2026's first question 
 #485. Max Consecutive Ones
 class Solution(object):
     def findMaxConsecutiveOnes(self, nums):
