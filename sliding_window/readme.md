@@ -1,13 +1,3 @@
 Sliding Window is a technique used to efficiently solve problems involving contiguous subarrays or substrings by maintaining a window that moves across the data instead of recalculating values repeatedly; the window either has a fixed size (where you add the next element and remove the previous one to update sums or averages) or a variable size (where you expand the window using a right pointer and shrink it using a left pointer when a condition breaks), allowing problems like maximum/minimum subarray, longest/shortest substring, and sum-based conditions to be solved in O(n) time using running values and two pointers rather than slow nested loops.
 
-left = 0
-current = 0
 
-for right in range(len(arr)):
-    current += arr[right]
-
-    while condition_breaks:
-        current -= arr[left]
-        left += 1
-
-    update_answer
