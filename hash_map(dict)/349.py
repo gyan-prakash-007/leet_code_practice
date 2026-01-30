@@ -8,7 +8,7 @@ class Solution:
         intersection = []
 
         for i in  nums1 :
-            freq_1[i] = freq_1.get(i,0)+1
+            freq_1[i] = 1
 
         for i in nums2:
             if i in freq_1 and i not in intersection :
