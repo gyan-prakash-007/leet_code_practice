@@ -17,6 +17,26 @@ class Solution(object):
         if count_a == count_b:
             return True 
 
+# bit optimised 
+
+        
+        class Solution:
+    def halvesAreAlike(self, s: str) -> bool:
+        count = 0 
+        
+        vowel = "aeiouAEIOU"
+        n = len(s)
+
+        for i in range(0,n//2):
+            if s[i] in vowel :
+                count += 1
+            if s[i+(n//2)] in vowel :
+                count -= 1
+
+        return count == 0
+        
+        
+
         return False 
 
 
