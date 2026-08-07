@@ -18,7 +18,7 @@
 
 ---
 
-## 👋 What this repo is
+## What this repo is
 
 This is where I dump everything from my DSA grind — basic patterns and full solutions to LeetCode problems, written in **Python** and **C++** depending on what I'm practicing that week.
 
@@ -45,7 +45,7 @@ LEET_CODE/
 
 ---
 
-## 🧩 Topics Covered So Far
+## Topics Covered So Far
 
 | Topic | Patterns | Problems Solved | Status |
 |---|---|---|---|
@@ -63,7 +63,7 @@ LEET_CODE/
 
 ---
 
-## 📌 How I'm Using This Repo
+## How I'm Using This Repo
 
 - Pushing every question's solution here to keep a running record — mainly for revision, so I can look back and re-solve without starting from scratch
 - Alongside LeetCode solutions, this also holds other DSA essentials — pattern printing, standard algorithm implementations, and other code I want on hand while practicing
@@ -76,7 +76,7 @@ LEET_CODE/
 
 <div align="center">
 
-*Tracking this publicly — not a flex, just an honest snapshot of where I'm at right now on the grind.*
+
 
 ![LeetCode Stats](https://leetcard.jacoblin.cool/USfdBp7qG4?theme=dark&font=Fira%20Code&ext=activity)
 
@@ -86,6 +86,6 @@ LEET_CODE/
 
 <div align="center">
 
-*🟣 Learning in public, one problem at a time.*
+*Learning in public, one problem at a time.*
 
 </div>
