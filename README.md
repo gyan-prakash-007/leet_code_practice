@@ -20,7 +20,7 @@
 
 ## 👋 What this repo is
 
-This is where I dump everything from my DSA grind — basic patterns, notes, and full solutions to LeetCode problems, written in **Python** and **C++** depending on what I'm practicing that week.
+This is where I dump everything from my DSA grind — basic patterns and full solutions to LeetCode problems, written in **Python** and **C++** depending on what I'm practicing that week.
 
 No polished tutorial vibes here. Think of it as notes from a friend who's figuring this out in real time and writing down what actually clicked (and what didn't, the first three times).
 
@@ -63,58 +63,22 @@ LEET_CODE/
 
 ---
 
-## 🐍 Python vs ⚙️ C++ — Why Both?
-
-- **Python** → fast to write, good for locking in the *logic* of a pattern first without syntax getting in the way.
-- **C++** → used once the pattern is clear, mainly to get comfortable with STL, time complexity, and how things behave closer to the metal — useful for interviews and CP.
-
-Each solved problem generally has the approach explained in a short comment block before the code — brute force → optimized, wherever relevant.
-
----
-
-## 📝 Notes Style
-
-The `notes/` folder isn't textbook stuff. It's:
-- Pattern recognition cues ("if you see X in the question, think Y")
-- Common mistakes I made and how I caught them
-- Time/space complexity breakdowns in plain language
-
----
-
 ## 📌 How I'm Using This Repo
 
+- Pushing every question's solution here to keep a running record — mainly for revision, so I can look back and re-solve without starting from scratch
+- Alongside LeetCode solutions, this also holds other DSA essentials — pattern printing, standard algorithm implementations, and other code I want on hand while practicing
 - One pattern/problem at a time, no skipping ahead just to pad numbers
-- Every solution includes my actual thought process, not just the final clean code
-- Revisited problems get a `v2` note if my approach improved later
+- Revisited problems get a `v2` version if my approach improved later
 
 ---
 
-<details>
-<summary>📊 LeetCode Stats — my progress so far</summary>
+## 📊 LeetCode Stats — my progress so far
 
 <div align="center">
 
 *Tracking this publicly — not a flex, just an honest snapshot of where I'm at right now on the grind.*
 
 ![LeetCode Stats](https://leetcard.jacoblin.cool/USfdBp7qG4?theme=dark&font=Fira%20Code&ext=activity)
-
-</div>
-
-</details>
-
----
-
-## 🔗 Connect
-
-<div align="center">
-
-[![GitHub](https://img.shields.io/badge/GitHub-gyan--prakash--007-8A2BE2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gyan-prakash-007)
-
-</div>
-
-<div align="center">
-
-📫 Reach me on [LinkedIn](https://www.linkedin.com/in/gyan-prakash-) · Follow the build-in-public journey on [Instagram](https://www.instagram.com/grindwith.gp/)
 
 </div>
 
