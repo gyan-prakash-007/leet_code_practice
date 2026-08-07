@@ -9,10 +9,10 @@
 ![DSA](https://img.shields.io/badge/DSA-Striver's%20A2Z-6A0DAD?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-In%20Progress-B19CD9?style=for-the-badge)
 
-![Repo Size](https://img.shields.io/github/repo-size/gyan-prakash-007/dsa-journey?style=flat-square&color=9370DB)
-![Last Commit](https://img.shields.io/github/last-commit/gyan-prakash-007/dsa-journey?style=flat-square&color=8A2BE2)
-![Stars](https://img.shields.io/github/stars/gyan-prakash-007/dsa-journey?style=flat-square&color=6A0DAD)
-![Issues](https://img.shields.io/github/issues/gyan-prakash-007/dsa-journey?style=flat-square&color=B19CD9)
+![Repo Size](https://img.shields.io/github/repo-size/gyan-prakash-007/leet_code_practice?style=flat-square&color=9370DB)
+![Last Commit](https://img.shields.io/github/last-commit/gyan-prakash-007/leet_code_practice?style=flat-square&color=8A2BE2)
+![Stars](https://img.shields.io/github/stars/gyan-prakash-007/leet_code_practice?style=flat-square&color=6A0DAD)
+![Issues](https://img.shields.io/github/issues/gyan-prakash-007/leet_code_practice?style=flat-square&color=B19CD9)
 
 </div>
 
@@ -89,11 +89,32 @@ The `notes/` folder isn't textbook stuff. It's:
 
 ---
 
+<details>
+<summary>📊 LeetCode Stats — my progress so far</summary>
+
+<div align="center">
+
+*Tracking this publicly — not a flex, just an honest snapshot of where I'm at right now on the grind.*
+
+![LeetCode Stats](https://leetcard.jacoblin.cool/USfdBp7qG4?theme=dark&font=Fira%20Code&ext=activity)
+
+</div>
+
+</details>
+
+---
+
 ## 🔗 Connect
 
 <div align="center">
 
 [![GitHub](https://img.shields.io/badge/GitHub-gyan--prakash--007-8A2BE2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gyan-prakash-007)
+
+</div>
+
+<div align="center">
+
+📫 Reach me on [LinkedIn](https://www.linkedin.com/in/gyan-prakash-) · Follow the build-in-public journey on [Instagram](https://www.instagram.com/grindwith.gp/)
 
 </div>
 
