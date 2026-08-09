@@ -1,11 +1,11 @@
 /*
     Pattern Printing — DSA Foundations
     -----------------------------------
-    A collection of classic square/triangle/pyramid/diamond patterns
-    built using nested loops. These are the base patterns every DSA
-    beginner grinds through before moving to actual problems — the
-    goal here is to get comfortable reading loop bounds and predicting
-    output shape before writing any code.
+    A collection of classic square/triangle/pyramid/diamond/hollow
+    patterns built using nested loops. These are the base patterns
+    every DSA beginner grinds through before touching real problems —
+    the goal is loop-bound intuition: read the `for` conditions and
+    predict the shape before running the code.
 
     Each function takes `n` (size factor) and prints one pattern to
     stdout. See README.md in this folder for sample outputs of every
@@ -189,13 +189,220 @@ void print_pattern11(int n) {
     }
 }
 
+// Pattern 12: Number butterfly (hollow, no stars)
+// Left side counts up 1..i, middle gap shrinks by 2 each row,
+// right side counts back down i..1 — like pattern 19 but with numbers.
+void print_pattern12(int n) {
+    int space = 2 * (n - 1);
+    for (int i = 1; i <= n; i++) {
+        // ascending numbers
+        for (int j = 1; j <= i; j++) {
+            cout << j;
+        }
+        // middle gap
+        for (int j = 1; j <= space; j++) {
+            cout << " ";
+        }
+        // descending numbers
+        for (int j = i; j >= 1; j--) {
+            cout << j;
+        }
+        cout << endl;
+        space -= 2;  // gap shrinks as the triangle widens
+    }
+}
+
+// Pattern 13: Continuous number triangle
+// Numbers keep counting up across the WHOLE pattern, not resetting per row
+// Row i has i numbers, continuing from wherever the last row left off
+void print_pattern13(int n) {
+    int start = 1;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            cout << start << " ";
+            start += 1;
+        }
+        cout << endl;
+    }
+}
+
+// Pattern 14: Alphabet right triangle
+// Row i prints letters A, B, C... up to the i-th letter
+void print_pattern14(int n) {
+    for (int i = 1; i <= n; i++) {
+        char start = 'A';
+        for (int j = 1; j <= i; j++) {
+            cout << start;
+            start += 1;
+        }
+        cout << endl;
+    }
+}
+
+// Pattern 15: Inverted alphabet triangle
+// Row i prints (n - i + 1) letters starting from A -> triangle shrinks going down
+void print_pattern15(int n) {
+    for (int i = 1; i <= n; i++) {
+        char start = 'A';
+        for (int j = 0; j <= n - i; j++) {
+            cout << start;
+            start += 1;
+        }
+        cout << endl;
+    }
+}
+
+// Pattern 16: Repeated-letter triangle
+// Row i prints the i-th letter of the alphabet, repeated i times
+void print_pattern16(int n) {
+    char start = 'A';
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j < i; j++) {
+            cout << start << " ";
+        }
+        cout << endl;
+        start += 1;  // move to next letter for the next row
+    }
+}
+
+// Pattern 17: Alphabet pyramid (grows then mirrors back)
+// Same shape as pattern 7 (star pyramid), but the middle letters
+// climb from A up to a peak, then fall back down to A.
+void print_pattern17(int n) {
+    for (int i = 0; i < n; i++) {
+        // left spacing to center the pyramid
+        for (int j = 0; j < n - i - 1; j++) {
+            cout << " ";
+        }
+        // letters: climb up to the midpoint of the row, then descend
+        char start = 'A';
+        int break_point = (2 * i + 1) / 2;
+        for (int j = 0; j < 2 * i + 1; j++) {
+            cout << start;
+            if (j < break_point) start++;
+            else start--;
+        }
+        // right spacing (mirrors left spacing)
+        for (int j = 0; j < n - i - 1; j++) {
+            cout << " ";
+        }
+        cout << endl;
+    }
+}
+
+// Pattern 18: Reverse alphabet run ending at E
+// Row i prints letters from ('E' - i) up to 'E' — each row grows leftward
+void print_pattern18(int n) {
+    for (int i = 0; i < n; i++) {
+        for (char j = 'E' - i; j <= 'E'; j++) {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+}
+
+// Pattern 19: Full star butterfly
+// Two halves: top half (stars shrink, middle gap grows) stacked over
+// bottom half (stars grow, middle gap shrinks) — a mirrored hourglass.
+void print_pattern19(int n) {
+    int spaces = 0;
+    // top half
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - i; j++) {
+            cout << '*';
+        }
+        for (int j = 0; j < spaces; j++) {
+            cout << " ";
+        }
+        for (int j = 0; j < n - i; j++) {
+            cout << '*';
+        }
+        spaces += 2;
+        cout << endl;
+    }
+
+    // bottom half (mirror of top)
+    int spaces2 = 2 * (n - 1);
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j < i; j++) {
+            cout << '*';
+        }
+        for (int j = 0; j < spaces2; j++) {
+            cout << " ";
+        }
+        for (int j = 0; j < i; j++) {
+            cout << '*';
+        }
+        spaces2 -= 2;
+        cout << endl;
+    }
+}
+
+// Pattern 20: Star sandglass (hollow hourglass)
+// Star count rises then falls (like pattern 10), but each row also has a
+// shrinking-then-growing gap in the middle, forming a hollow hourglass/X.
+void print_pattern20(int n) {
+    int spaces = 2 * n - 1;
+    for (int i = 1; i <= 2 * n - 1; i++) {
+        int stars = i;
+        if (i > n) stars = 2 * n - i;  // mirror star count past the midpoint
+
+        for (int j = 1; j <= stars; j++) {
+            cout << "*";
+        }
+        for (int j = 1; j <= spaces; j++) {
+            cout << " ";
+        }
+        for (int j = 1; j <= stars; j++) {
+            cout << "*";
+        }
+
+        cout << endl;
+        if (i < n) spaces -= 2;   // gap shrinks going into the middle
+        else spaces += 2;         // gap grows coming out of the middle
+    }
+}
+
+// Pattern 21: Hollow square
+// Only print '*' on the border (first/last row, first/last column),
+// everything else inside is blank space.
+void print_pattern21(int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == 0 || j == 0 || i == n - 1 || j == n - 1) {
+                cout << "*";
+            } else {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+// Pattern 22: Concentric number square (diamond-in-a-square)
+// For every cell, find the distance to the nearest edge (top/bottom/left/right)
+// and use that to pick the number — smaller distance = outer ring = bigger number.
+void print_pattern22(int n) {
+    for (int i = 0; i < 2 * n - 1; i++) {
+        for (int j = 0; j < 2 * n - 1; j++) {
+            int top = i;
+            int left = j;
+            int right = (2 * n - 2) - j;
+            int down = (2 * n - 2) - i;
+            // distance to closest edge decides which "ring" this cell belongs to
+            cout << (n - min(min(top, down), min(left, right)));
+        }
+        cout << endl;
+    }
+}
+
 int main() {
     int t;
     cin >> t;  // number of test cases
     for (int i = 0; i < t; i++) {
         int n;
         cin >> n;
-        print_pattern11(n);
+        print_pattern22(n);
         cout << endl;
     }
 
