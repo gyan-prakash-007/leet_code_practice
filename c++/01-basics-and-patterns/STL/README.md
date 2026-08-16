@@ -1,6 +1,14 @@
-# C++ STL Notes
+<div align="center">
 
-Quick reference notes on the STL containers and functions I use the most, following Striver's A2Z Sheet. Each topic below is its own block with a short explanation and an example. File: [`stl_notes.cpp`](./stl_notes.cpp)
+# 🟣 C++ STL Notes
+
+![C++](https://img.shields.io/badge/C++-8A2BE2?style=for-the-badge&logo=cplusplus&logoColor=white)
+![STL](https://img.shields.io/badge/STL-Reference-6A0DAD?style=for-the-badge)
+![Sheet](https://img.shields.io/badge/Sheet-Striver's%20A2Z-B19CD9?style=for-the-badge)
+
+</div>
+
+Quick reference notes on the STL containers and functions I use the most, following Striver's A2Z Sheet. Each topic below is its own block with a short explanation, an example, and the time complexity of the main operations. File: [`stl_notes.cpp`](./stl_notes.cpp)
 
 Most functions in the file are just for practice and reference, they are not called from `main()`. The point here is to remember syntax fast, not to run the whole file top to bottom.
 
@@ -21,6 +29,8 @@ You can also nest a pair inside another pair:
 pair<int, pair<int, int>> q = {1, {3, 4}};
 cout << q.second.first; // 3
 ```
+
+**Time complexity:** accessing `.first` or `.second` is O(1), same as reading a regular variable.
 
 ---
 
@@ -47,6 +57,17 @@ v.clear();               // empty the vector
 
 `emplace_back` is generally a bit faster than `push_back` since it builds the element in place instead of copying it.
 
+**Time complexity:**
+
+| Operation | Complexity |
+|---|---|
+| Access by index `v[i]` | O(1) |
+| `push_back` / `emplace_back` | O(1) amortized |
+| `pop_back` | O(1) |
+| `insert` / `erase` at a given position | O(n) |
+| `find` (using `std::find`) | O(n) |
+| `size`, `empty` | O(1) |
+
 ---
 
 ## List
@@ -61,6 +82,16 @@ ls.push_front(1);
 ```
 
 Use a list when you are doing a lot of insertions and deletions in the middle of the sequence, and a vector when you need fast random access.
+
+**Time complexity:**
+
+| Operation | Complexity |
+|---|---|
+| `push_back` / `push_front` | O(1) |
+| `pop_back` / `pop_front` | O(1) |
+| `insert` / `erase` (with iterator in hand) | O(1) |
+| Access by index | O(n), no direct indexing |
+| `size`, `empty` | O(1) |
 
 ---
 
@@ -78,6 +109,15 @@ dq.pop_back();
 dq.pop_front();
 ```
 
+**Time complexity:**
+
+| Operation | Complexity |
+|---|---|
+| `push_back` / `push_front` | O(1) |
+| `pop_back` / `pop_front` | O(1) |
+| Access by index `dq[i]` | O(1) |
+| `insert` / `erase` in the middle | O(n) |
+
 ---
 
 ## Stack
@@ -93,6 +133,8 @@ st.pop();
 cout << st.top(); // 1
 ```
 
+**Time complexity:** `push`, `pop`, `top`, `size`, `empty` are all O(1). There is no random access or search on a stack.
+
 ---
 
 ## Queue
@@ -107,6 +149,8 @@ cout << q.front(); // 1
 q.pop();
 cout << q.front(); // 2
 ```
+
+**Time complexity:** `push`, `pop`, `front`, `back`, `size`, `empty` are all O(1).
 
 ---
 
@@ -131,6 +175,14 @@ minHeap.push(2);
 cout << minHeap.top(); // 2
 ```
 
+**Time complexity:**
+
+| Operation | Complexity |
+|---|---|
+| `push` / `emplace` | O(log n) |
+| `pop` | O(log n) |
+| `top` | O(1) |
+
 ---
 
 ## Set
@@ -152,6 +204,15 @@ auto it = st.find(3); // iterator to 3, or st.end() if not found
 st.erase(3);          // erase by value
 ```
 
+**Time complexity:**
+
+| Operation | Complexity |
+|---|---|
+| `insert` | O(log n) |
+| `erase` (by value or iterator) | O(log n) |
+| `find` | O(log n) |
+| `lower_bound` / `upper_bound` | O(log n) |
+
 ---
 
 ## Multiset
@@ -169,6 +230,8 @@ ms.erase(1);          // erases ALL occurrences of 1
 ms.erase(ms.find(1)); // erases just ONE occurrence
 ```
 
+**Time complexity:** same as set, `insert`, `erase`, and `find` are all O(log n). Erasing by value removes every matching element, and each one costs O(log n), so erasing k copies is O(k log n).
+
 ---
 
 ## Unordered Set
@@ -183,6 +246,16 @@ st.insert(2);
 ```
 
 Use a set when you need sorted order or `lower_bound` / `upper_bound`, and unordered_set when you just need fast lookups and don't care about order.
+
+**Time complexity:**
+
+| Operation | Average | Worst case |
+|---|---|---|
+| `insert` | O(1) | O(n) |
+| `erase` | O(1) | O(n) |
+| `find` | O(1) | O(n) |
+
+The worst case only shows up with a lot of hash collisions, which is rare in practice.
 
 ---
 
@@ -210,17 +283,37 @@ cout << it->second; // 20
 cout << mpp[5]; // key 5 does not exist, this adds it with value 0 and prints 0
 ```
 
+**Time complexity:**
+
+| Operation | Complexity |
+|---|---|
+| `insert` / `emplace` | O(log n) |
+| `[]` access or insert | O(log n) |
+| `find` | O(log n) |
+| `erase` | O(log n) |
+| `lower_bound` / `upper_bound` | O(log n) |
+
 ---
 
 ## Multimap
 
 Same as a map, but keys can repeat. One difference is you cannot use `mpp[key]` style access here like you can with map.
 
+**Time complexity:** same as map, `insert`, `find`, and `erase` are all O(log n).
+
 ---
 
 ## Unordered Map
 
 Same idea as map (key value pairs), but no sorting and operations are O(1) on average instead of O(log n). Good when you just need fast key lookups.
+
+**Time complexity:**
+
+| Operation | Average | Worst case |
+|---|---|---|
+| `insert` / `[]` | O(1) | O(n) |
+| `find` | O(1) | O(n) |
+| `erase` | O(1) | O(n) |
 
 ---
 
@@ -245,6 +338,15 @@ do {
 
 You can also sort with your own comparator function when the default ordering is not enough, for example sorting a list of pairs by a custom rule.
 
+**Time complexity:**
+
+| Function | Complexity |
+|---|---|
+| `sort` | O(n log n) |
+| `max_element` / `min_element` | O(n) |
+| `__builtin_popcount` | O(1) (hardware instruction) |
+| `next_permutation` | O(n) per call, O(n × n!) to print all permutations |
+
 ---
 
 ## Notes to self
@@ -253,3 +355,11 @@ You can also sort with your own comparator function when the default ordering is
 - Set and map keep things sorted automatically, unordered versions trade that sorting for speed.
 - `emplace` builds the element in place and is usually a little faster than `insert` or `push`, but `insert` is sometimes needed when you already have a ready made pair or object.
 - Multiset and multimap are just the "allow duplicates" versions of set and map.
+
+---
+
+<div align="center">
+
+*🟣 Learning in public, one container at a time.*
+
+</div>
