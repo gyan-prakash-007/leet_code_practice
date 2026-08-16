@@ -8,7 +8,7 @@
 
 </div>
 
-Quick reference notes on the STL containers and functions I use the most, following Striver's A2Z Sheet. Each topic below is its own block with a short explanation, an example, and the time complexity of the main operations. File: [`stl_notes.cpp`](./stl_notes.cpp)
+Quick reference notes on the STL containers and functions I use the most, following Striver's A2Z Sheet. Each topic below is its own block with a short explanation, an example, and the time complexity of the main operations. File: [`stl_notes.cpp`](./STL.cpp)
 
 Most functions in the file are just for practice and reference, they are not called from `main()`. The point here is to remember syntax fast, not to run the whole file top to bottom.
 
