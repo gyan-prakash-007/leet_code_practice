@@ -14,7 +14,7 @@ Basic math problems from Striver's A2Z Sheet. These are the small building block
 
 ## Number of Digits
 
-**Problem link:** https://www.naukri.com/code360/problems/number-of-digits_4538242
+[Problem Link](https://www.naukri.com/code360/problems/number-of-digits_4538242)
 
 Count how many digits a number has.
 
@@ -40,11 +40,18 @@ int countDigit(long long x) {
 }
 ```
 
+**Time complexity:** Method 1 is O(d) where d is the number of digits. Method 2 is O(1).
+
+**Notes:**
+- Method 1 is O(number of digits), method 2 is O(1) but depends on floating point math, which can be slightly off for edge cases like exact powers of 10. Method 1 is safer, method 2 is faster.
+- `long long` is used here instead of `int` since digit counting is often tested with really big numbers that overflow a normal int.
+- This same loop pattern (pull last digit, divide by 10) shows up in reverse number, palindrome check, and Armstrong number below. Once this clicks, the rest get easier.
+
 ---
 
 ## Reverse a Number
 
-**Problem link:** https://www.naukri.com/code360/problems/reverse-of-a-number_624652
+[Problem Link](https://www.naukri.com/code360/problems/reverse-of-a-number_624652)
 
 Pull out the last digit of the number one at a time, and build the reversed number by shifting it left and adding that digit.
 
@@ -57,11 +64,18 @@ while (n > 0) {
 }
 ```
 
+**Time complexity:** O(d) where d is the number of digits in n. Space is O(1).
+
+**Notes:**
+- `n % 10` gives the last digit, `n / 10` removes it. This pair of operations is the base building block for a lot of digit manipulation problems.
+- Watch out for overflow if the original number is close to the int limit, since the reversed number can end up bigger than expected in some edge cases (like numbers ending in large digits).
+- This code lives inside `main()` directly rather than being its own function, so keep that in mind while reading through the file.
+
 ---
 
 ## Palindrome Number
 
-**Problem link:** https://www.naukri.com/code360/problems/palindrome-number_624662
+[Problem Link](https://www.naukri.com/code360/problems/palindrome-number_624662)
 
 A number is a palindrome if it reads the same forwards and backwards, like `121` or `1221`. The check is simple: reverse the number, then compare it to the original.
 
@@ -80,11 +94,18 @@ bool palindrome(int n) {
 }
 ```
 
+**Time complexity:** O(d) where d is the number of digits in n. Space is O(1).
+
+**Notes:**
+- This is basically the reverse-a-number logic wrapped in a comparison. Good example of how the same small building block gets reused across different problems.
+- Storing the original value in `og` before modifying `n` is important, otherwise there is nothing left to compare against at the end.
+- Negative numbers are not handled here. A negative number is technically never a palindrome (because of the minus sign), so that is worth thinking about if the input can be negative.
+
 ---
 
 ## Armstrong Number
 
-**Problem link:** https://www.naukri.com/code360/problems/armstrong-number_1462443
+[Problem Link](https://www.naukri.com/code360/problems/armstrong-number_1462443)
 
 A number is an Armstrong number if the sum of its own digits, each raised to the power of the total digit count, equals the number itself. Example: `153 = 1³ + 5³ + 3³`.
 
@@ -113,11 +134,18 @@ bool isArmstrong(int num) {
 }
 ```
 
+**Time complexity:** O(d) where d is the number of digits, since there are two passes over the digits, each O(d). Space is O(1).
+
+**Notes:**
+- Two separate loops here, first to count digits, then to actually build the sum. The digit count has to be known upfront since it is used as the power in the second loop.
+- `pow()` returns a double, so `arm += pow(...)` involves an implicit conversion back to int. Fine for small numbers, but worth knowing this is happening under the hood.
+- Classic Armstrong examples to test against: 153, 371, 9474.
+
 ---
 
 ## Divisors of a Number
 
-**Problem link:** https://www.naukri.com/code360/problems/print-all-divisors-of-a-number_1164188
+[Problem Link](https://www.naukri.com/code360/problems/print-all-divisors-of-a-number_1164188)
 
 Find every number that divides `n` exactly.
 
@@ -162,11 +190,18 @@ int* printDivisors(int n, int &size) {
 }
 ```
 
+**Time complexity:** Method 1 is O(n). Method 2 is O(sqrt(n) log(sqrt(n))) because of the extra sort at the end, or just O(sqrt(n)) if you don't count the sort. Space for both is O(number of divisors).
+
+**Notes:**
+- The `i != n / i` check matters most for perfect squares, otherwise the square root itself would get added twice (example: for n = 16, i = 4 and n / i = 4 are the same divisor).
+- Method 2 finds divisors out of order (small ones and big ones mixed together), which is why it needs a `sort()` at the end. Method 1 already comes out sorted naturally.
+- Both functions return a raw pointer allocated with `new`, so whoever calls this needs to `delete[]` it later to avoid a memory leak. Worth remembering once vectors get used instead of raw arrays.
+
 ---
 
 ## Check Prime
 
-**Problem link:** https://www.naukri.com/code360/problems/check-prime_624934
+[Problem Link](https://www.naukri.com/code360/problems/check-prime_624934)
 
 A number is prime if it has exactly two divisors, 1 and itself. This uses the same sqrt(n) divisor-pair trick as above: count divisors up to sqrt(n), and if the total divisor count is exactly 2, it's prime.
 
@@ -186,6 +221,13 @@ bool isPrime(int n) {
     return count == 2;
 }
 ```
+
+**Time complexity:** O(sqrt(n)). Space is O(1).
+
+**Notes:**
+- `i * i <= n` does the same job as `i <= sqrt(n)`, but avoids calling `sqrt()` and its floating point rounding issues. Slightly safer version of the same idea.
+- 1 is not a prime number, and this function handles that correctly since 1 only has one divisor (itself), so count never reaches 2.
+- This same "count divisors up to sqrt(n)" pattern is the backbone for a lot of number theory problems, worth having memorized cold.
 
 ---
 
@@ -209,6 +251,13 @@ int gcd(int a, int b) {
     else return a;
 }
 ```
+
+**Time complexity:** O(log(min(a, b))). Space is O(1).
+
+**Notes:**
+- The core idea, `gcd(a, b) = gcd(b, a % b)`, comes up again in problems involving fractions, ratios, or simplifying values. Worth remembering as a concept, not just code.
+- This version is O(log(min(a, b))), way faster than checking every number up to the smaller value.
+- C++17 and later actually has `std::gcd()` built into `<numeric>`, so this is a good one to know how to write by hand, but also good to know it exists as a library function for actual use.
 
 ---
 

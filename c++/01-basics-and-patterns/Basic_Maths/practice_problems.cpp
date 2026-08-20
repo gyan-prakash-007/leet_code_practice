@@ -1,5 +1,4 @@
 
-Basic math · CPP
 // Number of Digits
  
 #include <iostream> 
