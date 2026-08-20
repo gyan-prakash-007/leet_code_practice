@@ -233,8 +233,6 @@ bool isPrime(int n) {
 
 ## GCD (Greatest Common Divisor)
 
-No problem link attached to this one in the original notes.
-
 Keep shrinking the bigger of the two numbers by taking the remainder, until one of them hits 0. Whatever is left is the GCD. This is the classic Euclidean algorithm.
 
 ```cpp
