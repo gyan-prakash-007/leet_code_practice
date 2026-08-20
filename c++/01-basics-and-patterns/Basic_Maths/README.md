@@ -8,7 +8,7 @@
 
 </div>
 
-Basic math problems from Striver's A2Z Sheet. These are the small building blocks (digits, reversing, primes, GCD) that show up again and again in bigger problems later. File: [`basic_math.cpp`](./basic_math.cpp)
+Basic math problems from Striver's A2Z Sheet. These are the small building blocks (digits, reversing, primes, GCD) that show up again and again in bigger problems later. File: [`basic_math.cpp`](./practice_problems.cpp)
 
 ---
 
