@@ -165,4 +165,23 @@ int gcd(int a , int b){
     if(a==0) return b;
     else return a;
 }
+
+// leetcode 9  Palindrome Number
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        long long reversed = 0;
+        long long dup = x;
+
+        while(x>0){
+            int last_digit = x % 10;
+            x = x/10;
+            reversed = (reversed*10)+last_digit;
+            
+        }
+
+        return dup == reversed ;
+    }
+};
  

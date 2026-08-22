@@ -8,7 +8,7 @@
 
 </div>
 
-Basic math problems from Striver's A2Z Sheet. These are the small building blocks (digits, reversing, primes, GCD) that show up again and again in bigger problems later. File: [`basic_math.cpp`](./practice_problems.cpp)
+Basic math problems from Striver's A2Z Sheet, plus a related LeetCode solution. These are the small building blocks (digits, reversing, primes, GCD) that show up again and again in bigger problems later. File: [`basic_math.cpp`](./basic_math.cpp)
 
 ---
 
@@ -233,6 +233,8 @@ bool isPrime(int n) {
 
 ## GCD (Greatest Common Divisor)
 
+No problem link attached to this one in the original notes.
+
 Keep shrinking the bigger of the two numbers by taking the remainder, until one of them hits 0. Whatever is left is the GCD. This is the classic Euclidean algorithm.
 
 ```cpp
@@ -256,6 +258,39 @@ int gcd(int a, int b) {
 - The core idea, `gcd(a, b) = gcd(b, a % b)`, comes up again in problems involving fractions, ratios, or simplifying values. Worth remembering as a concept, not just code.
 - This version is O(log(min(a, b))), way faster than checking every number up to the smaller value.
 - C++17 and later actually has `std::gcd()` built into `<numeric>`, so this is a good one to know how to write by hand, but also good to know it exists as a library function for actual use.
+
+---
+
+## LeetCode 9: Palindrome Number
+
+[Problem Link](https://leetcode.com/problems/palindrome-number/)
+
+Same idea as the palindrome check above, but this is written in LeetCode's expected submission format, wrapped inside a `Solution` class with a member function instead of a plain standalone function.
+
+```cpp
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        long long reversed = 0;
+        long long dup = x;
+
+        while (x > 0) {
+            int last_digit = x % 10;
+            x = x / 10;
+            reversed = (reversed * 10) + last_digit;
+        }
+
+        return dup == reversed;
+    }
+};
+```
+
+**Time complexity:** O(d) where d is the number of digits in x. Space is O(1).
+
+**Notes:**
+- `reversed` and `dup` are `long long`, not `int`. This handles a tricky edge case: reversing a large positive int can overflow a normal int, so the wider type avoids that quietly breaking the check.
+- Negative numbers are handled without any extra `if` check. Since the `while` loop only runs when `x > 0`, a negative `x` skips the loop entirely, `reversed` stays 0, and `dup == reversed` comes out false automatically, which is correct since a negative number is never a palindrome.
+- This is the same reverse-and-compare pattern from the earlier Palindrome Number problem, just adapted to fit how LeetCode expects solutions to be submitted (inside a class).
 
 ---
 
