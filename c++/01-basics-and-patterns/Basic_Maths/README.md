@@ -294,6 +294,43 @@ public:
 
 ---
 
+## LeetCode 258: Add Digits
+
+[Problem Link](https://leetcode.com/problems/add-digits/)
+
+This asks for the digital root of a number, keep adding up its digits until only one digit is left. Example: 38 becomes 3 + 8 = 11, then 1 + 1 = 2, so the answer is 2.
+
+```cpp
+class Solution {
+public:
+    int addDigits(int num) {
+        int sum = 0;
+
+        while (num > 0) {
+            int last_digit = num % 10;
+            num = num / 10;
+
+            sum = sum + last_digit;
+            if (num == 0 && sum >= 10) {
+                num = sum;
+                sum = 0;
+            }
+        }
+
+        return sum;
+    }
+};
+```
+
+**Time complexity:** O(log n) overall. The first pass over the digits is O(log n), and each digit-summing round after that works on a much smaller number, so it barely adds anything on top.
+
+**Notes:**
+- The clever part here is that it does not use a separate outer loop to repeat "sum the digits" again and again. Instead, the moment `num` runs out (`num == 0`) but `sum` still has more than one digit (`sum >= 10`), it just feeds `sum` back into `num` and resets `sum` to 0, right inside the same loop.
+- Worth tracing through an example by hand once (like 38) to see how `num` and `sum` swap roles mid-loop. It looks confusing at first glance but it is just "restart the digit-summing process using the previous sum as the new number".
+- There is also a neat O(1) math formula for this exact problem: `num == 0 ? 0 : 1 + (num - 1) % 9`. Good to know it exists, but the loop version here is easier to actually understand and explain.
+
+---
+
 <div align="center">
 
 *🟣 Learning in public, one basic math problem at a time.*
