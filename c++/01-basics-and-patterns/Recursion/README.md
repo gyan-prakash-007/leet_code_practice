@@ -1,4 +1,4 @@
-<div align="center">
+]<div align="center">
 
 # 🟣 Recursion Basics
 
@@ -8,7 +8,7 @@
 
 </div>
 
-Notes on recursion, how it works, why it needs a base case, and how to trace through it using a recursion tree. File: [`recursion_basics.cpp`](./recursion_basics.cpp)
+Notes on recursion, how it works, why it needs a base case, and how to trace through it using a recursion tree. File: [`recursion.cpp`](./recursion.cpp)
 
 ---
 
@@ -67,9 +67,52 @@ Since each call only makes one more call (not two or three), this is a straight 
 
 ---
 
+## Example: Counter with a Global Variable
+
+This was the first example in the original notes, using a global counter instead of passing values as parameters.
+
+```cpp
+int cnt = 0;
+void print(){
+    if(cnt==3) return;
+    cout << cnt << endl;
+    cnt++;
+    print();
+}
+
+int main(){
+    print();
+    return 0;
+}
+```
+
+Here `cnt` is a global variable, so every call to `print()` shares the exact same `cnt`, there is no separate copy for each call like there was with `i` in the earlier example. The base case is `if (cnt == 3) return`.
+
+### Tracing it
+
+```
+print()  [cnt = 0]  -> prints 0, cnt becomes 1, calls print()
+   print()  [cnt = 1]  -> prints 1, cnt becomes 2, calls print()
+      print()  [cnt = 2]  -> prints 2, cnt becomes 3, calls print()
+         print()  [cnt = 3]  -> base case hit, return
+      <- returns
+   <- returns
+<- returns
+```
+
+Output is `0`, `1`, `2`, each on its own line. Just like the name-printing example, this is a straight chain, not a branching tree, since each call only makes one more call.
+
+**Time complexity:** O(1) in terms of the constant it counts to here (it always stops at `cnt == 3`), but if that stopping value were `n` instead of a fixed `3`, it would be O(n), same as the earlier example.
+
+**Space complexity:** O(number of calls), since each call sits on the stack until it returns.
+
+A quick side note on something from the original code: the block below it (`#ifndef ONLINE_JUDGE ... freopen(...)`) is a competitive programming trick, not part of recursion itself. It redirects `cin` and `cout` to read from `input.txt` and write to `output.txt` on your own machine, but skips that redirection automatically when the code runs on an online judge (since online judges usually define `ONLINE_JUDGE` for you). Handy for testing locally without typing input by hand every time, but worth knowing it is unrelated to how the recursion actually works.
+
+---
+
 ## A Branching Example (Recursion Tree)
 
-The example above is a straight line because each call only makes one more call. A recursion tree really starts to look like a tree once a function makes more than one recursive call inside itself, like this:
+Both examples above are straight lines because each call only makes one more call. A recursion tree really starts to look like a tree once a function makes more than one recursive call inside itself, like this:
 
 ```cpp
 void solve(int n){
