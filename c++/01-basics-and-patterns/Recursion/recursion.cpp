@@ -86,7 +86,7 @@ bool palindorme(int i , string &s){
     return palindorme(i+1,s);
 }
 
-// nth fibonacci number
+// nth fibonacci number // lc 509
 int fib(int n){
     if(n<=1){
         return n;
@@ -96,6 +96,27 @@ int fib(int n){
 
     return last + slast ;
 }
+
+// leetcode 125
+
+class Solution {
+public:
+
+    bool solve(int left,int right, string &s){
+        if(left > right) return true ;
+        //if(s[right]!= s[left]) return false;
+        if(!isalnum(s[left])) return solve(left+1,right,s);
+        if(!isalnum(s[right])) return solve(left, right-1,s);
+        if(tolower(s[right])!= tolower(s[left])) return false;
+
+        return solve(left+1,right-1,s);
+    }
+    bool isPalindrome(string s) {
+
+        return solve(0,s.size()-1,s);
+        
+    }
+};
 
 int main(){
     int n= 3;
