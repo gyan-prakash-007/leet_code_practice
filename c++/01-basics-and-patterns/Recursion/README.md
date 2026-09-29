@@ -265,6 +265,8 @@ Called as `palindorme(0, s)`.
 
 ## A Branching Example: Fibonacci
 
+[Problem Link](https://leetcode.com/problems/fibonacci-number/) (LeetCode 509)
+
 Every example so far has been a straight chain, one call leading to exactly one more call. A recursion tree really starts to look like an actual tree once a function makes more than one recursive call inside itself, and the Fibonacci function is the classic example of that.
 
 ```cpp
@@ -302,6 +304,58 @@ Notice `fib(2)` gets computed twice here, completely from scratch both times, an
 **Time complexity:** O(2^n), since the number of calls roughly doubles with every increase in `n`, and there is a huge amount of repeated work.
 
 **Space complexity:** O(n), which might look surprising given how wide the tree gets. The call stack only ever holds one path down through the tree at a time, not the whole tree at once, so the recursion depth (and therefore the space used) is only as deep as `n`, even though the total number of calls made along the way is exponential.
+
+---
+
+## LeetCode 125: Valid Palindrome
+
+[Problem Link](https://leetcode.com/problems/valid-palindrome/)
+
+This is the earlier two pointer palindrome idea, but for a real sentence instead of a clean lowercase word. It has to ignore anything that is not a letter or digit, and treat uppercase and lowercase as the same letter. Example: `"A man, a plan, a canal: Panama"` should count as a palindrome once punctuation, spaces and casing are ignored.
+
+```cpp
+class Solution {
+public:
+
+    bool solve(int left,int right, string &s){
+        if(left > right) return true ;
+        if(!isalnum(s[left])) return solve(left+1,right,s);
+        if(!isalnum(s[right])) return solve(left, right-1,s);
+        if(tolower(s[right])!= tolower(s[left])) return false;
+
+        return solve(left+1,right-1,s);
+    }
+    bool isPalindrome(string s) {
+        return solve(0,s.size()-1,s);
+    }
+};
+```
+
+**What each check does, in order:**
+- `left > right` is the base case. Once the two pointers cross or meet, every pair has already matched, so it returns `true`.
+- `!isalnum(s[left])` skips over anything that is not a letter or digit on the left side, moving `left` forward one step without comparing anything yet.
+- `!isalnum(s[right])` does the same thing on the right side, moving `right` backward.
+- `tolower(s[right]) != tolower(s[left])` does the actual comparison, but lowercases both characters first, so `'A'` and `'a'` count as equal.
+- If none of the above triggered, both characters are valid and matched, so it moves both pointers inward at once and keeps going.
+
+**Tracing it with a short example, `"0P"`:**
+
+```
+solve(0, 1, "0P")
+   '0' is alnum, 'P' is alnum, tolower('P') != tolower('0')
+   -> characters do not match, return false
+```
+
+`isPalindrome("0P")` correctly returns `false`.
+
+**Time complexity:** O(n), since in the worst case the two pointers each move across roughly half the string once.
+
+**Space complexity:** O(n) for the recursion stack in the worst case (a string with no letters or digits skips through every single character one at a time before the pointers cross), though the comparison logic itself only needs O(1) extra space.
+
+**Notes:**
+- This is the exact same two pointer skeleton as `palindorme` from earlier, comparing from both ends and moving inward. The only real difference is the two extra "skip this character" checks before the actual comparison.
+- `isalnum` and `tolower` both come from `<cctype>`, worth knowing by name since character filtering like this shows up in a lot of string problems, not just palindromes.
+- Passing `s` by reference (`string &s`) here again avoids copying the whole string on every recursive call, same reasoning as in `palindorme`.
 
 ---
 
