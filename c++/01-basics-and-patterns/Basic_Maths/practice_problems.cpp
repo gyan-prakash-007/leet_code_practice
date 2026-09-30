@@ -210,3 +210,39 @@ public:
     }
     
 };
+
+// lc 505
+// brute force 
+class Solution {
+public:
+    bool checkPerfectNumber(int num) {
+        int result = 0;
+
+        for(int i = 1; i < num; i++) {
+            if(num % i == 0) {
+                result += i;
+            }
+        }
+
+        return result == num;
+    }
+};
+// optimised
+
+class Solution {
+public:
+    bool checkPerfectNumber(int num) {
+        int result = 0;
+        if(num<=1) return false;
+        for(int i=1;i*i<=num;i++){
+            if(num%i==0){
+                result += i;
+                if(((num/i)!=i) and num/i != num){
+                    result += (num/i);
+                }
+            }
+
+        }
+                    return result == num;
+    }
+};
