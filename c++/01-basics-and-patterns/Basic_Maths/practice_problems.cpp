@@ -246,3 +246,32 @@ public:
                     return result == num;
     }
 };
+
+// lc728 self dividing number 
+
+class Solution {
+public:
+    vector<int> selfDividingNumbers(int left, int right) {
+        vector<int> result;
+       
+        for(int i = left ; i <= right; i++){
+            bool valid = true ;
+            int temp = i ;
+            while(temp>0){
+                int last_digit = temp % 10;
+                if(last_digit == 0 || i % last_digit != 0){
+                    valid = false;
+                    break;
+                }
+                temp = temp/10;
+
+            }
+            if(valid){
+                    result.push_back(i);
+                }
+        }
+
+        return result ;
+        
+    }
+};

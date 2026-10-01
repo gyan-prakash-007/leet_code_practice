@@ -322,6 +322,143 @@ public:
 };
 ```
 
+---
+
+**## LeetCode 728: Self Dividing Numbers**
+
+[Problem Link](https://leetcode.com/problems/self-dividing-numbers/)
+
+A self-dividing number is a number that is divisible by each of its digits. If a number contains `0`, it cannot be self-dividing because division by zero is not possible.
+
+```cpp
+class Solution {
+public:
+    vector<int> selfDividingNumbers(int left, int right) {
+        vector<int> result;
+       
+        for(int i = left ; i <= right; i++){
+            bool valid = true ;
+            int temp = i ;
+            while(temp>0){
+                int last_digit = temp % 10;
+                if(last_digit == 0 || i % last_digit != 0){
+                    valid = false;
+                    break;
+                }
+                temp = temp/10;
+
+            }
+            if(valid){
+                    result.push_back(i);
+                }
+        }
+
+        return result ;
+        
+    }
+};
+```
+---
+## LeetCode 507: Perfect Number
+
+[Problem Link](https://leetcode.com/problems/perfect-number/)
+
+A perfect number is a positive integer that is equal to the sum of its positive proper divisors. Example: `6 = 1 + 2 + 3`.
+
+**Method 1: Brute force**
+
+Check every number from `1` to `num - 1`. If it divides `num`, add it to `result`.
+
+```cpp
+class Solution {
+public:
+    bool checkPerfectNumber(int num) {
+        int result = 0;
+
+        for(int i = 1; i < num; i++) {
+            if(num % i == 0) {
+                result += i;
+            }
+        }
+
+        return result == num;
+    }
+};
+```
+
+**Method 2: Optimized**
+
+Similar to finding all divisors, we only need to loop up to `sqrt(num)`. Divisors come in pairs (`i` and `num / i`). We add both to our sum, making sure we don't add the number itself (since we only want proper divisors) and we don't add the square root twice.
+
+```cpp
+class Solution {
+public:
+    bool checkPerfectNumber(int num) {
+        int result = 0;
+        if(num <= 1) return false;
+        
+        for(int i = 1; i * i <= num; i++) {
+            if(num % i == 0) {
+                result += i;
+                if(((num / i) != i) and num / i != num) {
+                    result += (num / i);
+                }
+            }
+        }
+        
+        return result == num;
+    }
+};
+```
+---
+---
+
+## LeetCode 728: Self Dividing Numbers
+
+[Problem Link](https://leetcode.com/problems/self-dividing-numbers/)
+
+A self-dividing number is a number that is divisible by every digit it contains. For example, `128` is self-dividing because `128 % 1 == 0`, `128 % 2 == 0`, and `128 % 8 == 0`. A self-dividing number cannot contain the digit zero.
+
+**Method: Iterate and Extract Digits**
+
+Loop through every number in the range `[left, right]`. For each number, extract its digits one by one. If any digit is `0` or fails to divide the original number evenly, mark it invalid and move to the next number.
+
+```cpp
+class Solution {
+public:
+    vector<int> selfDividingNumbers(int left, int right) {
+        vector<int> result;
+       
+        for(int i = left ; i <= right; i++){
+            bool valid = true;
+            int temp = i;
+            
+            while(temp > 0){
+                int last_digit = temp % 10;
+                
+                if(last_digit == 0 || i % last_digit != 0){
+                    valid = false;
+                    break;
+                }
+                temp = temp / 10;
+            }
+            
+            if(valid){
+                result.push_back(i);
+            }
+        }
+
+        return result;
+    }
+};
+```
+
+**Time complexity:** O(N * D) where N is the total numbers in the range (`right - left + 1`), and D is the number of digits in the largest number. Since the max number is up to 10^4, D is at most 5, making it practically O(N). Space is O(K) for the output array, where K is the count of valid self-dividing numbers.
+
+**Notes:**
+- `last_digit == 0` must be checked *before* `i % last_digit != 0`. If you try to modulo by 0, the program will crash with a runtime divide-by-zero error. C++ short-circuit evaluation guarantees that if `last_digit == 0` is true, the modulo part is never executed.
+- We must use a `temp` variable to break down the digits. If we modified `i` directly, we wouldn't have the original number to check `i % last_digit` against.
+
 **Time complexity:** O(log n) overall. The first pass over the digits is O(log n), and each digit-summing round after that works on a much smaller number, so it barely adds anything on top.
 
 **Notes:**
