@@ -324,41 +324,7 @@ public:
 
 ---
 
-**## LeetCode 728: Self Dividing Numbers**
 
-[Problem Link](https://leetcode.com/problems/self-dividing-numbers/)
-
-A self-dividing number is a number that is divisible by each of its digits. If a number contains `0`, it cannot be self-dividing because division by zero is not possible.
-
-```cpp
-class Solution {
-public:
-    vector<int> selfDividingNumbers(int left, int right) {
-        vector<int> result;
-       
-        for(int i = left ; i <= right; i++){
-            bool valid = true ;
-            int temp = i ;
-            while(temp>0){
-                int last_digit = temp % 10;
-                if(last_digit == 0 || i % last_digit != 0){
-                    valid = false;
-                    break;
-                }
-                temp = temp/10;
-
-            }
-            if(valid){
-                    result.push_back(i);
-                }
-        }
-
-        return result ;
-        
-    }
-};
-```
----
 ## LeetCode 507: Perfect Number
 
 [Problem Link](https://leetcode.com/problems/perfect-number/)
